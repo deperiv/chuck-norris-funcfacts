@@ -4,6 +4,8 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import FactsList from '../components/FactsList';
 import Scroll from '../components/Scroll';
 import chuck from '../img/chuck.png';
+import 'animate.css';
+
 
 class App extends Component {
     constructor(){
@@ -20,6 +22,7 @@ class App extends Component {
         .then(resp => resp.json())
         .then(newFact => this.setState({facts: [newFact, ...this.state.facts]}))
         
+        const a = document.getElementById("FC")
         console.log(this.state.facts)
     }
 
@@ -29,8 +32,8 @@ class App extends Component {
             <> 
                 <h1>Chuck Norris Fun Facts</h1>
                 <div className='body-structure'>
-                    <div className='body-doc'>
-                        <img className="image" src={chuck} alt="Chuck"/>
+                    <div id="FC" className='body-doc'>
+                        <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                         <button className='button cool-bttn' onClick={this.addFact}>Get a Random FunFact</button>
                     </div>
  

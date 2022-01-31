@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Fact = ({id, text}) => {
+const Fact = ({text}) => {
     return (
-        <div className='fact-dec'>
+        <div className='fact-dec animate__animated animate__fadeInLeft'>
             <p>{text}</p>
         </div>
     );

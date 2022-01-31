@@ -98,19 +98,24 @@ p {
     width: 20px;
     padding: 10px;
   }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: rgb(131, 62, 14);
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(39, 18, 2);
-    
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(73, 38, 11);
-  }
+/* Track */
+::-webkit-scrollbar-track {
+background: rgb(131, 62, 14);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: rgb(39, 18, 2);
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: rgb(73, 38, 11);
+}
+
+.fact-dec::after{
+    width: 10px;
+    height: 10px;
+    background-color: blue;
+}
