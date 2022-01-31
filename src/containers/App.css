@@ -1,0 +1,116 @@
+.body-structure {
+    height: 70vh;
+    display: flex;
+    justify-content: space-around;
+}
+
+.body-doc{
+    height: inherit;
+    width: 50%;
+    max-width: 50%;
+    margin: 0px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@font-face {
+    font-family: 'Chibold';
+    src: url('../fonts/Chibold.ttf');
+}
+
+h1 {
+    font-family: 'Chibold', 'Courier New', Courier, monospace;
+    font-size: 4em;
+    text-align: center;
+    color: white;
+    margin: 80px;
+}
+h2 {
+    font-family: 'Chibold';
+    font-size: 2em;
+    text-align: center;
+    color: white;
+}
+.image {
+    width: 50%;
+}
+
+.factlist-dec {
+    background-color: chocolate;
+    border: 10px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.fact-dec {
+    background-color: rgb(173, 78, 10);
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em; 
+    color: white;
+    font-weight: bold;
+}
+
+.cool-bttn {
+    padding: 50px;
+    /* background-color: rgb(40, 105, 202);
+    border: 8px solid rgb(11, 71, 160); rgb(173, 78, 10)*/
+    background-color: rgb(173, 78, 10);
+    border: 8px solid black;
+    border-radius: 20px;
+    font-family: 'Chibold', 'Courier New', Courier, monospace;
+    font-size: 1.5em;
+    color: white;
+    transition: 0.2s all;
+}
+
+.cool-bttn:hover{
+    cursor: pointer;
+    background-color: rgb(146, 74, 22);
+}
+
+.cool-bttn:active{
+    transform: scale(0.9);
+}
+
+.scrollWrapper {
+    width: 50%;
+    max-width: 50%;
+    overflow-y: scroll;
+    border: 8px solid black;
+    height: 60vh;
+    border-radius: 10px;
+    width: 85%;
+    margin: 65px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+    padding: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgb(131, 62, 14);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(39, 18, 2);
+    
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(73, 38, 11);
+  }
