@@ -119,3 +119,21 @@ background: rgb(73, 38, 11);
     height: 10px;
     background-color: blue;
 }
+
+
+@keyframes fadeOutDown {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+      -webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);
+    }
+  }
+.go-down {
+    transition: 1s all;
+    -webkit-animation-name: fadeOutDown;
+    animation-name: fadeOutDown;
+}
