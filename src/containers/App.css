@@ -1,5 +1,10 @@
-
-
+.top-row{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 0px;
+}
 
 .get-in-container {
     position: absolute;
@@ -17,6 +22,7 @@
     display: flex;
     justify-content: space-around;
     padding: 0px;
+    text-align: center;
 }
 
 .body-doc{
@@ -40,14 +46,15 @@ h1 {
     font-size: 4em;
     text-align: center;
     color: white;
-    margin: 80px;
+    margin: 70px;
+    margin-bottom: 50px;
 }
 
 h1::selection, p::selection {
     background: #080808;
   }
 h1::selection, p::selection {
-background: #0e0e0e;
+    background: #0e0e0e;
 }
 
 h2 {
@@ -95,7 +102,7 @@ p {
     font-size: 1.2em; 
     color: white;
     font-weight: bold;
-    text-align: center;
+    
 }
 
 .fact-dec p {
@@ -103,7 +110,8 @@ p {
 }
 
 .cool-bttn {
-    padding: 50px;
+    padding: 20px;
+    /* padding: 50px; */
     background-color: rgb(173, 78, 10);
     border: 8px solid black;
     border-radius: 20px;
@@ -150,20 +158,122 @@ footer {
   }
 /* Track */
 ::-webkit-scrollbar-track {
-background: rgb(131, 62, 14);
+    background: rgb(131, 62, 14);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: rgb(39, 18, 2);
+    background: rgb(39, 18, 2);
 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: rgb(73, 38, 11);
+    background: rgb(73, 38, 11);
 }
 
+.warning-msg {
+    width: 55%;
+    text-align: right; 
+    margin: auto;
+}
+
+
+
+/* Style The Dropdown Button */
+.dropbtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: chocolate;
+    border: 8px solid black;
+    border-left: 0px;
+    border-radius: 0px 30px 30px 0px;
+    padding: 0px 10px 0px 10px;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: absolute;
+    left: 0px;
+    display: inline-block;
+    transition: 0.5s all;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgb(173, 78, 10);
+    width: 85%;
+    height: 30vh;
+    border: 5px solid black;
+    border-left: 0px;
+    border-top: 0px; 
+    border-radius: 0px 0px 10px 0px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition: 0.5s all;
+}
+
+.cat-button {
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    font-size: 1em;
+    background-color: rgb(173, 78, 10);
+    border: none;
+    width: 100%;
+    padding: 12px 16px;
+    margin: 0px;
+    text-decoration: none;
+    text-transform: capitalize; 
+    cursor: pointer;
+    transition: 0.2s all;
+}
+
+/* Change color of dropdown links on hover */
+.cat-button:hover{
+    background-color: rgb(138, 65, 14);
+}
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.arrow {
+    border: solid rgb(22, 14, 10);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    padding: 5px;
+    margin: 0px 20px 5px 30px;
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: rgb(131, 62, 14);
+}
+
+footer {
+    text-align: center;
+}
+
+@media only screen and (max-width: 1300px) {
+    .top-row {
+      justify-content: flex-end;
+    }
+}
 
 @media only screen and (max-width: 1200px) {
     .image {
@@ -185,7 +295,7 @@ background: rgb(73, 38, 11);
         width: 200px;
         height: auto;
     }
-    .scrollWrapper {
+    .body-structure .scrollWrapper {
         width: 90%;
         max-width: 90%;
         height: 600px;
@@ -197,96 +307,43 @@ background: rgb(73, 38, 11);
         border-radius: 15px;
         padding: 20px;
     }
-}
+    .dropbtn {
+        border: 5px solid black;
+        border-left: 0px;
+    }
+    .top-row{
+        display: block;
+        justify-content: center;
+        text-align: center;
+    }
+    .dropdown {
+        position: relative;
+        margin: auto;
+    }
 
-/* Style The Dropdown Button */
-.dropbtn {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: chocolate;
-    border: 8px solid black;
-    border-left: 0px;
-    border-radius: 0px 30px 30px 0px;
-    padding: 0px 10px 0px 10px;
-    cursor: pointer;
-}
+    .dropbtn {
+        border: 5px solid black;
+        border-radius: 30px 30px 30px 30px;
+        padding: 0px 10px 0px 30px;
+    }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    transition: 0.5s all;
-}
+    .warning-msg {
+        text-align: center;
+    }
 
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: rgb(173, 78, 10);
-    width: 85%;
-    height: 30vh;
-    border: 5px solid black;
-    border-left: 0px;
-    border-top: 0px; 
-    border-radius: 0px 0px 10px 0px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    transition: 0.5s all;
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        left: 30px;
+        background-color: rgb(173, 78, 10);
+        width: 70%;
+        height: 30vh;
+        border: 5px solid black;
+        border-top: 0px; 
+        border-radius: 0px 0px 10px 10px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        transition: 0.5s all;
+    }
+    
 }
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.cat-button {
-    color: white;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-    font-size: 1em;
-    background-color: rgb(173, 78, 10);
-    border: none;
-    width: 100%;
-    padding: 12px 16px;
-    margin: 0px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.cat-button:hover{
-    background-color: rgb(138, 65, 14);
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-    background-color: chocolate
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content{
-    display: block;
-}
-
-.arrow {
-    border: solid rgb(22, 14, 10);
-    border-width: 0 5px 5px 0;
-    display: inline-block;
-    padding: 5px;
-    margin: 0px 20px 5px 30px;
-}
-
-.down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: rgb(131, 62, 14);
-}
-
