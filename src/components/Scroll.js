@@ -3,7 +3,7 @@ import '../containers/App.css'
 
 const Scroll = (props) => {
     return (
-        <div id="FC" className = "factlist-dec scrollWrapper">
+        <div className = "factlist-dec scrollWrapper">
             {props.children}
         </div>
     )

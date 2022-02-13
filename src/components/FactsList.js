@@ -1,18 +1,31 @@
 import React from 'react';
 import Fact from './Fact';
 
-const FactList = ({facts}) => {
+const FactList = ({facts, displayedAll}) => {
     return (
-        <div>
+        <div >
             {
-                facts.map((funfact) => {
-                    return (
-                    <Fact 
-                        key={funfact.id}
-                        text={funfact.value}
-                    />
-                    );
-                })
+                displayedAll?
+                    <>  
+                        <p>There are no more facts for this category. ¡Pick another one!</p>
+                        {facts.map((funfact) => {
+                            return (
+                                <Fact 
+                                    key={funfact.id}
+                                    text={funfact.value}
+                                />
+                            );
+                        })}
+                    </>
+                :
+                    facts.map((funfact) => {
+                        return (
+                        <Fact 
+                            key={funfact.id}
+                            text={funfact.value}
+                        />
+                        );
+                    })
             }
         </div>
     )
