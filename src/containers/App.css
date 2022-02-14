@@ -1,7 +1,7 @@
 .mid-row{
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 0px;
     margin: 10px;
     margin-left: 0px;
 }
@@ -84,7 +84,6 @@ h3 {
     padding: 10px;
     margin: 5%;
     margin-left: 10px;    
-    width: 50%;
     max-width: 50%;
     height: 80%;
     max-height: 80%;
@@ -155,7 +154,7 @@ p {
 footer {
     position: relative;
     bottom: 10px;
-    padding: 10px 0px;
+    padding: 5px 0px;
     position: fixed;
     left: 0;
     bottom: 0;
@@ -200,9 +199,25 @@ footer .link-p:hover {
 
 .warning-msg {
     width: 55%;
-    text-align: right; 
+    text-align: center; 
     margin: auto;
 }
+
+.favorite-btnn {
+    position: absolute;
+    right: 0px;
+    background-color: chocolate;
+    border: 8px solid black;
+    border-right: 0px;
+    border-radius: 30px 0px 0px 30px;
+    padding: 0px 20px 0px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.favorite-btnn:hover {
+    background-color: rgb(131, 62, 14);
+}
+
 
 /* Style The Dropdown Button */
 .dropbtn {
