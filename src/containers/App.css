@@ -1,4 +1,4 @@
-.top-row{
+.mid-row{
     display: flex;
     justify-content: center;
     padding: 10px;
@@ -23,6 +23,7 @@
     display: flex;
     justify-content: space-around;
     padding: 0px;
+    margin-bottom: 100px;
     text-align: center;
 }
 
@@ -44,7 +45,7 @@
 
 h1 {
     font-family: 'Chibold', 'Courier New', Courier, monospace;
-    font-size: 4em;
+    font-size: 5em;
     text-align: center;
     color: white;
     margin: 10px;
@@ -153,17 +154,25 @@ p {
 
 footer {
     position: relative;
-    top: 90%;
-    padding-top: 50px;
+    bottom: 10px;
+    padding: 10px 0px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #18181B;
+    color: white;
+    text-align: center;
 }
 
 footer .link-p {
     padding: 0px;
-    font-style: normal;
-    
-    
+    font-style: normal;      
 }
 
+footer .link-p:hover {
+    color: rgb(49, 111, 204);
+}
 
 .scrollWrapper {
     overflow-y: scroll; 
@@ -297,9 +306,7 @@ footer .link-p {
     background-color: rgb(131, 62, 14);
 }
 
-footer {
-    text-align: center;
-}
+
 
 @media only screen and (max-width: 1300px) {
     .top-row {
@@ -333,6 +340,7 @@ footer {
         height: 600px;
         margin: auto;
         margin-top: 30px;
+        margin-bottom: 50px;
     }
     .cool-bttn {
         border: 5px solid black;
@@ -343,7 +351,7 @@ footer {
         border: 5px solid black;
         border-left: 0px;
     }
-    .top-row{
+    .mid-row{
         display: block;
         justify-content: center;
         text-align: center;
@@ -369,7 +377,6 @@ footer {
         border: 5px solid black;
         border-top: 0px; 
         border-radius: 0px 0px 20px 20px;
-        
     }
     
 }
