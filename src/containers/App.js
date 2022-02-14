@@ -14,7 +14,7 @@ class App extends Component {
         this.state = {
             facts: [],
             categories: [],
-            selectedCategory : '',
+            selectedCategory : 'All',
             finishedPlaying: false,
             repeatedCount: 0,
             displayedAll: false
@@ -64,7 +64,7 @@ class App extends Component {
     }
 
     async addFact (category) {
-        if (!category.length){
+        if (category === 'All'){
             const responseFetch = await fetch('https://api.chucknorris.io/jokes/random');
             const responseJson = await responseFetch.json();
             this.appendIfNotRepeated(category, responseJson)
@@ -90,18 +90,14 @@ class App extends Component {
         this.setState({finishedPlaying: true})
     }
 
-    
     changeCategory = (category) => {
-        category === 'All'?
-            this.setState({selectedCategory: ''})
-        :
-            this.setState({selectedCategory: category})
+        this.setState({selectedCategory: category})
     }
 
     componentDidMount(){
         fetch('https://api.chucknorris.io/jokes/categories')  
         .then(resp => resp.json())
-        .then(categories => this.setState({categories: ["All", ...categories]}))
+        .then(categories => this.setState({categories: ['All', ...categories]}))
         .catch(error => console.log(error));
     }
 
@@ -110,23 +106,29 @@ class App extends Component {
 
         return (
             <>  
-                {/* <div className='get-in-container'>
-                    <p className='get-in'>Wanna save your favorite facts? <br /> <a>Register here</a></p>
-                    <p className='get-in'>Or if you already have an account <br /> <a>Sign In here</a></p>
-                </div> */}
+                <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <p className='link-p'>Register</p>
+                    <p className='link-p'>Sign In</p>
+                </nav>
                 <h1>Chuck Norris Fun Facts</h1>
                 <div className='top-row'>
                     <div className="warning-msg"><p>¡Beware! Some fun facts may be politically incorrect for certain audiences</p></div>
                     <div className="dropdown">
                         <div className="dropbtn">
-                           <p>Categories</p> 
+                           <p className='cap'>Category: {selectedCategory}</p> 
                            <div className='arrow down'></div>
                         </div>
                 
                         <div className="dropdown-content scrollWrapper">
                         {
                             categories.map((category, index) => {
-                                return (<CategorySelector key={index} category={category} changeCategory={this.changeCategory}/>)
+                                return (
+                                    <CategorySelector 
+                                        key={index} 
+                                        category={category} 
+                                        changeCategory={this.changeCategory}
+                                    />
+                                )
                             })
                         }
                         </div>
@@ -138,10 +140,10 @@ class App extends Component {
                     <div className='body-doc'>
                         <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                         <div style={{width: '50%'}}>
-                            <button className='button cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
-                            <div style={{display: 'flex', justifyContent: 'space-around', marginTop: '10px'}}>
-                                <button className='button cool-bttn' onClick={()=>this.goAuto()}> Automatic </button>
-                                <button className='button cool-bttn' onClick={()=>this.stop()}> Stop </button>
+                            <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
+                            <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '10px'}}>
+                                <button className='cool-bttn' onClick={()=>this.goAuto()}> Automatic </button>
+                                <button className='cool-bttn' onClick={()=>this.stop()}> Stop </button>
                             </div>
                         </div>
                         
@@ -158,7 +160,7 @@ class App extends Component {
                         </Scroll>
                 </div>
                 <footer>
-                    <p>By deperazar. Using the <a href='https://api.chucknorris.io'>Chuck Norris API</a></p>
+                    <p>By deperazar. Using the <i className='link-p'>Chuck Norris API</i></p>
                 </footer>  
                 
             </>

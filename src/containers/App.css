@@ -8,8 +8,9 @@
 
 .get-in-container {
     position: absolute;
-    top: 100px;
+    top: 20px;
     right: 35px;
+    display: inline;
 }
 
 .get-in {
@@ -46,15 +47,15 @@ h1 {
     font-size: 4em;
     text-align: center;
     color: white;
-    margin: 70px;
+    margin: 10px;
     margin-bottom: 50px;
 }
 
-h1::selection, p::selection {
+h1::selection, p::selection{
     background: #080808;
   }
-h1::selection, p::selection {
-    background: #0e0e0e;
+.link-p::selection {
+    background: #ffffff;
 }
 
 h2 {
@@ -105,8 +106,16 @@ p {
     
 }
 
+.cap {
+    text-transform: capitalize;
+}
+
 .fact-dec p {
     text-align: left;
+}
+
+.main-bttn{
+    width: 100%;
 }
 
 .cool-bttn {
@@ -118,7 +127,7 @@ p {
     font-family: 'Chibold', 'Courier New', Courier, monospace;
     font-size: 1.5em;
     color: white;
-    transition: 0.2s all;
+    transition: all 0.2s;
 }
 
 .cool-bttn:hover{
@@ -130,12 +139,14 @@ p {
     transform: scale(0.9);
 }
 
-a {
-    color: rgb(230, 215, 204);
-    transition: 0.2s all;
+.link-p {
+    padding: 0px 20px;
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+    transition: all 0.2s;
 }
 
-a:hover {
+.link-p:hover {
     cursor: pointer;
     color: rgb(3, 3, 2);
 }
@@ -144,6 +155,13 @@ footer {
     position: relative;
     top: 90%;
     padding-top: 50px;
+}
+
+footer .link-p {
+    padding: 0px;
+    font-style: normal;
+    
+    
 }
 
 
@@ -164,7 +182,6 @@ footer {
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: rgb(39, 18, 2);
-
 }
 
 /* Handle on hover */
@@ -178,8 +195,6 @@ footer {
     margin: auto;
 }
 
-
-
 /* Style The Dropdown Button */
 .dropbtn {
     display: flex;
@@ -192,7 +207,7 @@ footer {
     border-radius: 0px 30px 30px 0px;
     padding: 0px 10px 0px 10px;
     cursor: pointer;
-    transition: 0.2s all;
+    transition: all 0.2s;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -200,24 +215,34 @@ footer {
     position: absolute;
     left: 0px;
     display: inline-block;
-    transition: 0.5s all;
+    transition: all 0.2s;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     position: absolute;
     background-color: rgb(173, 78, 10);
     width: 85%;
-    height: 30vh;
+    max-height: 0px;
     border: 5px solid black;
     border-left: 0px;
     border-top: 0px; 
-    border-radius: 0px 0px 10px 0px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 0px 0px 20px 0px;
+    box-shadow: 0px 8px 16px 8px rgba(0,0,0,0.8);
     z-index: 1;
-    transition: 0.5s all;
+    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
+
+.dropdown-content::-webkit-scrollbar,
+.dropdown-content::-webkit-scrollbar-track,
+.dropdown-content::-webkit-scrollbar-thumb,
+.dropdown-content::-webkit-scrollbar-thumb:hover {
+    width: 10px;
+    padding: 10px;
+    border-radius: 0px 0px 20px 0px;
+  }
 
 .cat-button {
     color: white;
@@ -240,11 +265,18 @@ footer {
     background-color: rgb(138, 65, 14);
 }
 
-
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content{
+.dropdown:focus .dropdown-content,
+.dropdown:focus-within .dropdown-content,
+.dropdown:hover .dropdown-content {
     display: flex;
     flex-direction: column;
+    max-height: 30vh;
+    visibility: visible; /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
 }
 
 .arrow {
@@ -332,18 +364,13 @@ footer {
     }
 
     .dropdown-content {
-        display: none;
-        position: absolute;
-        left: 30px;
-        background-color: rgb(173, 78, 10);
+        left: 13%;
         width: 70%;
-        height: 30vh;
         border: 5px solid black;
         border-top: 0px; 
-        border-radius: 0px 0px 10px 10px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-        transition: 0.5s all;
+        border-radius: 0px 0px 20px 20px;
+        
     }
     
 }
+
