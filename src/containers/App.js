@@ -40,12 +40,20 @@ class App extends Component {
         .catch(error => console.log(error));
     }
 
-    changeCategory = (category) => {
-        this.setState({selectedCategory: category})
+    addFavoriteFact = (fact) => {
+        const {favoriteFacts} = this.state.user;
+        this.setState({user:Object.assign(this.state.user, {favoriteFacts: [fact, ...favoriteFacts]})})
     }
 
-    showFavoriteFacts = () => {
-        this.setState({facts: this.state.user.favoriteFacts})
+    removeFavoriteFact = (fact) => {
+        const {favoriteFacts} = this.state.user;
+        this.setState({user:Object.assign(this.state.user, {
+            favoriteFacts: favoriteFacts.filter(factF => factF.id !== fact.id)
+        })})
+    }
+
+    changeCategory = (category) => {
+        this.setState({selectedCategory: category})
     }
 
     onRouteChange = (route) => {
@@ -59,7 +67,7 @@ class App extends Component {
 
     render(){
         const {categories, selectedCategory, route} = this.state;
-
+        console.log(this.state.user.favoriteFacts)
         return (
             <>  
                 <Navigation onRouteChange={this.onRouteChange} route={route}/>
@@ -72,7 +80,10 @@ class App extends Component {
                             <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
                         </div>
                         <Body 
-                            selectedCategory={selectedCategory}
+                            selectedCategory={selectedCategory} 
+                            addFavoriteFact={this.addFavoriteFact} //Wont be used
+                            removeFavoriteFact={this.removeFavoriteFact} //Wont be used
+                            route={route}
                         />
                     </>
                     : (
@@ -81,11 +92,15 @@ class App extends Component {
                         <div className='mid-row'>
                             <div className="warning-msg"><p>Welcome {this.state.user.name}! You better be ready to have some fun</p><p>¡Beware! Some fun facts may be politically incorrect for certain audiences</p></div>
                             <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
-                            <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
+                            {/* <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div> */}
                         </div>
                         <Body 
                             selectedCategory={selectedCategory}
-                        />                     
+                            favoriteFacts={this.state.user.favoriteFacts} 
+                            addFavoriteFact={this.addFavoriteFact} 
+                            removeFavoriteFact={this.removeFavoriteFact}
+                            route={route}
+                        />                   
                         </>
                         : (
                             (route === 'signin')
