@@ -10,9 +10,9 @@ class Body extends React.Component {
         this.state = {
             facts: [],
             finishedPlaying: false,
-            repeatedCount: 0,
             displayedAll: false,
-            alreadyFavorite: false
+            alreadyFavorite: false,
+            prevCategory: 'All'
         }
     }
 
@@ -20,9 +20,6 @@ class Body extends React.Component {
         const ids = this.state.facts.filter(fact => fact.id === factToCheck.id)
         return ids.length? true:false
     };
-
-
-    //Non recursive
 
     async getFact (category) {
         if (category === 'All'){
@@ -36,14 +33,9 @@ class Body extends React.Component {
         }
     }
 
-    appendIfNotRepeated = () => {
-
-    }
-
-    async addFact1 (category) {
+    async addFact (category) {
         this.setState({alreadyFavorite: false})
         let fact = await this.getFact(category);
-        console.log(fact)
         let count = 0;
         while (this.checkRepetition(fact) && count < 10) {//While the fact is repeated and there are less than 10 fetchs
             console.log(count)
@@ -60,11 +52,11 @@ class Body extends React.Component {
         }
     }
 
-    async playFact1 (text, onEndFunction = ()=>{}) {
+    async playFact (text) {
         const options = {
             key: 'ddb7eaed19ad4c66a911c6e73ccb9a19',
             language: 'en-us',
-            voice: 'Amy',
+            voice: 'John',
             audioFormat: '16khz_16bit_mono',
             src: encodeURIComponent(text)
         }
@@ -74,135 +66,31 @@ class Body extends React.Component {
             method: "GET"});
         const audio = new Audio(audioResponse.url);
         await audio.play();
-        audio.addEventListener("ended", onEndFunction);
+        audio.addEventListener("ended", () => {
+            console.log('Audio Ended')
+            this.goAuto(this.state)
+        });
     }
 
-
-    async goAuto1 (command = 'keepGoing') {
-        const {finishedPlaying, displayedAll} = this.state;
+    async goAuto (command = 'keepGoing') {
+        const {finishedPlaying, displayedAll, prevCategory} = this.state;
         const {selectedCategory} = this.props;
-        const fact = await this.addFact1(selectedCategory);
-        const play = await this.playFact(fact.value, this.goAuto);   
-        
-
-        // if (command === 'start'){ //Just pressed Automatic Button
-        //     this.setState({finishedPlaying: false})
-        //     this.addFact1(selectedCategory)
-        //         .then(fact => {
-        //             if (fact.id !== 0){
-        //                 this.playFact(fact.value, this.goAuto)
-        //             }
-        //         })
-        //         .catch(err => console.error(err));  
-        // } else {
-        //     if (!finishedPlaying && !displayedAll) { //If the stop button hasnt been pressed
-        //         console.log('Hello there')
-        //         this.addFact1(selectedCategory)
-        //         .then(fact => {
-        //             if (fact.id !== '0'){
-        //                 console.log(fact.id)
-        //                 this.playFact(fact.value, this.goAuto)
-        //             }
-        //         })
-        //         .catch(err => console.error(err));  
-        //     }
-        // }
-    }
-
-    //Basic Function add fact
-    //Fetch a fact
-    //Already in list? fetch and try again : Append to list and return it
-
-    // appendIfNotRepeated = (category, newFact) => {
-    //     if (this.checkRepetition(newFact)){//If the fact is already in the facts array
-    //         this.setState({repeatedCount: this.state.repeatedCount + 1})
-    //         if (this.state.repeatedCount < 10){ //If repeatedCount < 10 try to get another fact
-    //             this.addFact(category)
-    //             return false
-    //         } else { //If repeatedCount >= 10 all facts have been displayed
-    //             this.setState({displayedAll: true})
-    //             console.log('No more')
-    //             return false
-    //         }
-    //     } else {
-    //         console.log('Added', newFact.id)
-    //         this.setState({displayedAll: false, repeatedCount: 0})
-    //         this.setState({facts: [newFact, ...this.state.facts]})
-    //         return true;
-    //     }        
-    // }
-
-    // async playFact (text, onEndFunction = ()=>{}) {
-    async playFact (text) {
-        const options = {
-            key: 'ddb7eaed19ad4c66a911c6e73ccb9a19',
-            language: 'en-us',
-            voice: 'Amy',
-            audioFormat: '16khz_16bit_mono',
-            src: encodeURIComponent(text)
+        if (selectedCategory !== prevCategory){// User just changed categories
+            
         }
         
-        fetch(`http://api.voicerss.org/?key=${options.key}&hl=${options.language}&v=${options.voice}&c=MP3&f=${options.audioFormat}&src=${options.src}`, {            
-        method: "GET"
-        })
-        .then(response => {
-            const audio = new Audio(response.url);
-            audio.play()
-            // audio.addEventListener("ended", onEndFunction);
-        })
-        .catch(err => console.error(err));     
-    }
-
-    async addFact (category) {
-        if (category === 'All'){
-            const responseFetch = await fetch('https://api.chucknorris.io/jokes/random');
-            const responseJson = await responseFetch.json();
-            const appended = this.appendIfNotRepeated(category, responseJson) //Appends fact if not repeated
-            console.log(appended)
-            return responseJson; //Shouldnt be returning if The fact is repeated. Play is going to catch it and then play it            
-        } else {
-            console.log(category)
-            const responseFetch = await fetch(`https://api.chucknorris.io/jokes/random?category=${category}`);
-            const responseJson = await responseFetch.json();
-            const appended = this.appendIfNotRepeated(category, responseJson) //Appends fact if not repeated
-            console.log(appended)
-            if (appended){
-                return responseJson; //Shouldnt be returning if The fact is repeated. Play is going to catch it and then play it            
-            } 
+        if(!this.state.displayedAll && !finishedPlaying){
+            const fact = await this.addFact(selectedCategory)
+            this.playFact(fact.value)        
         }
     }
 
-    goAuto = (command = 'keepGoing') => {
-        const {finishedPlaying, displayedAll} = this.state;
-        const {selectedCategory} = this.props;
-        if (command === 'start'){
-            this.setState({finishedPlaying: false})
-            this.addFact1(selectedCategory)
-                .then(fact => {
-                    if (fact.id !== 0){
-                        this.playFact(fact.value, this.goAuto)
-                    }
-                })
-                .catch(err => console.error(err));  
-        } else {
-            if (!finishedPlaying && !displayedAll) { //If the stop button hasnt been pressed
-                this.addFact1(selectedCategory)
-                .then(fact => {
-                    if (fact.id !== 0){
-                        this.playFact(fact.value, this.goAuto)
-                    }
-                })
-                .catch(err => console.error(err));  
-            }
-        }
-    }
- 
     stop = () => {
+        console.log('Stop')
         this.setState({finishedPlaying: true})
     }
 
     showFavoriteFacts = () => {
-        console.log('Here')
         this.setState({alreadyFavorite: true})
         this.setState({facts: this.props.favoriteFacts})
     }
@@ -215,13 +103,22 @@ class Body extends React.Component {
         return (
             
             <div className='body-structure'>
-                <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
+                {
+                    route === 'profile'
+                    ?(
+                        <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
+                    )
+                    :(
+                        <></>
+                    )
+                }
+                
                 <div className='body-doc'>
                     <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                     <div style={{width: '50%'}}>
-                        <button className='main-bttn cool-bttn' onClick={() => this.addFact1(selectedCategory)}>Get a Random FunFact</button>
+                        <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
                         <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '10px'}}>
-                            <button className='cool-bttn' onClick={()=>this.goAuto1('start')}> Automatic </button>
+                            <button className='cool-bttn' onClick={()=> this.goAuto('start')}> Automatic </button>
                             <button className='cool-bttn' onClick={()=>this.stop()}> Stop </button>
                         </div>
                     </div>

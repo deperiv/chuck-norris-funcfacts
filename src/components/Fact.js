@@ -6,12 +6,11 @@ class Fact extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isFavorite: false
+            isFavorite: this.props.alreadyFavorite
         }
     }
 
     toggleFavorite = (id, text) => {
-        console.log('Toggle')
         if (this.state.isFavorite){
             this.setState({isFavorite: false});
             this.props.removeFavoriteFact({id: id, value: text});
@@ -23,28 +22,20 @@ class Fact extends React.Component {
 
     render(){
         const {isFavorite} = this.state;
-        const {text, id, route, alreadyFavorite} = this.props;
+        const {text, id, route} = this.props;
         return (
             route === 'profile'
             ?(
                 <div className='fact-dec animate__animated animate__fadeInLeft'>
-                    {
-                        alreadyFavorite 
-                        ? (
-                            <img onClick={()=> this.toggleFavorite(id, text)} className="star star-selected" src={star} alt="Star"/>
-                        )
-                        : (
-                            isFavorite 
-                            ? (
-                                <img onClick={()=> this.toggleFavorite(id, text)} className="star star-selected" src={star} alt="Star"/>
-                            )
-                            : (
-                                <img onClick={()=> this.toggleFavorite(id, text)} className="star" src={star} alt="Star"/>
-                            )
-                        )
+                    { 
+                    isFavorite 
+                    ? (
+                        <img onClick={()=> this.toggleFavorite(id, text)} className="star star-selected" src={star} alt="Star"/>
+                    )
+                    : (
+                        <img onClick={()=> this.toggleFavorite(id, text)} className="star" src={star} alt="Star"/>
+                    )
                     }
-                    
-                    
                     <p style={{paddingLeft: '20px'}}>{text}</p>
                 </div>
             )

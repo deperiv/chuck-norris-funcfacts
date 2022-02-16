@@ -67,7 +67,6 @@ class App extends Component {
 
     render(){
         const {categories, selectedCategory, route} = this.state;
-        console.log(this.state.user.favoriteFacts)
         return (
             <>  
                 <Navigation onRouteChange={this.onRouteChange} route={route}/>

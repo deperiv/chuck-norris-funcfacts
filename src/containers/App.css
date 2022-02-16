@@ -228,6 +228,7 @@ footer .link-p:hover {
 
 .favorite-btnn {
     position: absolute;
+    top: 20%;
     right: 0px;
     background-color: chocolate;
     border: 8px solid black;
