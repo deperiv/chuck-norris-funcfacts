@@ -3,17 +3,31 @@ import chuck            from '../img/chuck.png';
 import Scroll           from '../components/Scroll';
 import ErrorBoundary    from '../components/ErrorBoundary';
 import FactsList        from '../components/FactsList';
+import CategorySelector from '../components/CategorySelector';
 
 class Body extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            categories: [],
+            selectedCategory: 'All',
             facts: [],
             finishedPlaying: false,
             displayedAll: false,
             alreadyFavorite: false,
-            prevCategory: 'All'
         }
+    }
+
+    componentDidMount(){
+        fetch('https://api.chucknorris.io/jokes/categories')  
+        .then(resp => resp.json())
+        .then(categories => this.setState({categories: ['All', ...categories]}))
+        .catch(error => console.log(error));
+    }
+
+    changeCategory = (category) => {
+        this.setState({selectedCategory: category});
+        this.setState({displayedAll: false});
     }
 
     checkRepetition = (factToCheck) => {
@@ -73,16 +87,18 @@ class Body extends React.Component {
     }
 
     async goAuto (command = 'keepGoing') {
-        const {finishedPlaying, displayedAll, prevCategory} = this.state;
-        const {selectedCategory} = this.props;
-        if (selectedCategory !== prevCategory){// User just changed categories
-            
+        const {finishedPlaying, displayedAll, selectedCategory} = this.state;
+        if (command === 'start'){ // Automatic button has been pressed
+            this.setState({finishedPlaying: false});
+            const fact = await this.addFact(selectedCategory)
+            this.playFact(fact.value) 
+        } else {//playFact called goAuto after the audio ended
+            if(!displayedAll && !finishedPlaying){
+                const fact = await this.addFact(selectedCategory)
+                this.playFact(fact.value)        
+            }
         }
         
-        if(!this.state.displayedAll && !finishedPlaying){
-            const fact = await this.addFact(selectedCategory)
-            this.playFact(fact.value)        
-        }
     }
 
     stop = () => {
@@ -92,17 +108,19 @@ class Body extends React.Component {
 
     showFavoriteFacts = () => {
         this.setState({alreadyFavorite: true})
+        this.setState({finishedPlaying: true});
         this.setState({facts: this.props.favoriteFacts})
     }
 
     render(){
         
-        const {facts, displayedAll, alreadyFavorite} = this.state;
-        const {selectedCategory, route, addFavoriteFact, removeFavoriteFact} = this.props;
+        const {facts, displayedAll, alreadyFavorite, categories, selectedCategory} = this.state;
+        const {route, addFavoriteFact, removeFavoriteFact} = this.props;
 
         return (
             
             <div className='body-structure'>
+                <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
                 {
                     route === 'profile'
                     ?(
@@ -117,7 +135,7 @@ class Body extends React.Component {
                     <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                     <div style={{width: '50%'}}>
                         <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
-                        <div style={{display: 'flex', justifyContent: 'space-between', marginTop: '10px'}}>
+                        <div className='buttn-section'>
                             <button className='cool-bttn' onClick={()=> this.goAuto('start')}> Automatic </button>
                             <button className='cool-bttn' onClick={()=>this.stop()}> Stop </button>
                         </div>

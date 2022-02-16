@@ -6,6 +6,13 @@
     margin-left: 0px;
 }
 
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-right:20px;
+}
+
 .get-in-container {
     position: absolute;
     top: 20px;
@@ -23,15 +30,14 @@
     display: flex;
     justify-content: space-around;
     padding: 0px;
-    margin-bottom: 100px;
+    
     text-align: center;
 }
 
 .body-doc{
     height: inherit;
     width: 50%;
-    max-width: 50%;
-    margin: 10px;    
+    max-width: 50%; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,16 +49,16 @@
     src: url('../fonts/Chibold.ttf');
 }
 
-h1 {
+.title {
     font-family: 'Chibold', 'Courier New', Courier, monospace;
-    font-size: 5em;
+    font-size: 4em;
     text-align: center;
     color: white;
-    margin: 10px;
-    margin-bottom: 50px;
+    margin: 0px
+    
 }
 
-h1::selection, p::selection{
+.title::selection, p::selection{
     background: #080808;
   }
 .link-p::selection {
@@ -83,6 +89,7 @@ h3 {
     border-radius: 10px;
     padding: 10px;
     margin: 5%;
+
     margin-left: 10px;    
     max-width: 50%;
     height: 80%;
@@ -139,6 +146,12 @@ p {
 
 .main-bttn{
     width: 100%;
+}
+
+.buttn-section {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 10px;
 }
 
 .cool-bttn {
@@ -221,7 +234,7 @@ footer .link-p:hover {
 }
 
 .warning-msg {
-    width: 55%;
+    width: 40%;
     text-align: center; 
     margin: auto;
 }
@@ -245,6 +258,7 @@ footer .link-p:hover {
 
 /* Style The Dropdown Button */
 .dropbtn {
+    
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -261,6 +275,7 @@ footer .link-p:hover {
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: absolute;
+    top: 20%;
     left: 0px;
     display: inline-block;
     transition: all 0.2s;
@@ -345,12 +360,24 @@ footer .link-p:hover {
     background-color: rgb(131, 62, 14);
 }
 
-
+@media only screen and (max-width: 1420px) {
+    .top-row {
+      justify-content: flex-end;
+    }
+    .body-structure {
+        margin-bottom: 60px;
+    }
+    .cool-bttn {
+        padding: 20px;
+        font-size: 1.2em;
+    }
+}
 
 @media only screen and (max-width: 1300px) {
     .top-row {
       justify-content: flex-end;
     }
+    
 }
 
 @media only screen and (max-width: 1200px) {
@@ -358,12 +385,24 @@ footer .link-p:hover {
       height: 50%;
       width: auto;
     }
+    .cool-bttn {
+        padding: 20px;
+        font-size: 1em;
+    }
 }
 
 @media only screen and (max-width: 1073px) {
+    .title {
+        margin: 20px auto;
+    }
+    .navigation{
+        padding-top: 10px;
+        padding-right: 10px;
+    }
     .body-structure {
         height: auto;
         display: block;
+        margin-bottom: 100px;
     }
     .body-doc {
         margin: auto;
@@ -373,7 +412,7 @@ footer .link-p:hover {
         width: 200px;
         height: auto;
     }
-    .body-structure .scrollWrapper {
+    .factlist-dec.scrollWrapper {
         width: 90%;
         max-width: 90%;
         height: 600px;
@@ -390,10 +429,22 @@ footer .link-p:hover {
         border: 5px solid black;
         border-left: 0px;
     }
+
     .mid-row{
         display: block;
         justify-content: center;
         text-align: center;
+    }
+
+    .favorite-btnn {
+        
+        max-width: 30%;
+        position: relative;
+        margin: auto;
+        margin-top: 20px;
+        border: 5px solid black;
+        border-radius: 30px 30px 30px 30px;
+        padding: 0px;
     }
     .dropdown {
         position: relative;
@@ -407,16 +458,28 @@ footer .link-p:hover {
     }
 
     .warning-msg {
+        width: 80%;
         text-align: center;
     }
 
     .dropdown-content {
-        left: 13%;
-        width: 70%;
+        left: 12%;
+        max-width: 200px;
         border: 5px solid black;
         border-top: 0px; 
         border-radius: 0px 0px 20px 20px;
     }
-    
+}
+
+@media only screen and (max-width: 940px) {
+    .buttn-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        margin-top: 0px;
+    }
+    .buttn-section .cool-bttn {
+        margin-top: 10px;
+    }
 }
 
