@@ -17,7 +17,6 @@ class Body extends React.Component {
             alreadyFavorite: false,
         }
     }
-
     componentDidMount(){
         fetch('https://api.chucknorris.io/jokes/categories')  
         .then(resp => resp.json())
@@ -33,18 +32,18 @@ class Body extends React.Component {
     checkRepetition = (factToCheck) => {
         const ids = this.state.facts.filter(fact => fact.id === factToCheck.id)
         return ids.length? true:false
-    };
+    }
 
     async getFact (category) {
-        if (category === 'All'){
-            const responseFetch = await fetch('https://api.chucknorris.io/jokes/random');
-            const responseJson = await responseFetch.json();
-            return await responseJson;
-        } else {
-            const responseFetch = await fetch(`https://api.chucknorris.io/jokes/random?category=${category}`);
-            const responseJson = await responseFetch.json();
-            return await responseJson;
-        }
+        const responseFetch = await fetch('http://localhost:3001/addFact', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                category: category
+            })
+        });
+        const responseJson = await responseFetch.json();
+        return responseJson;
     }
 
     async addFact (category) {
@@ -52,7 +51,6 @@ class Body extends React.Component {
         let fact = await this.getFact(category);
         let count = 0;
         while (this.checkRepetition(fact) && count < 10) {//While the fact is repeated and there are less than 10 fetchs
-            console.log(count)
             fact = await this.getFact(category);
             count ++;
         }
@@ -70,7 +68,7 @@ class Body extends React.Component {
         const options = {
             key: 'ddb7eaed19ad4c66a911c6e73ccb9a19',
             language: 'en-us',
-            voice: 'John',
+            voice: 'Mary',
             audioFormat: '16khz_16bit_mono',
             src: encodeURIComponent(text)
         }
@@ -81,7 +79,6 @@ class Body extends React.Component {
         const audio = new Audio(audioResponse.url);
         await audio.play();
         audio.addEventListener("ended", () => {
-            console.log('Audio Ended')
             this.goAuto(this.state)
         });
     }
@@ -98,27 +95,33 @@ class Body extends React.Component {
                 this.playFact(fact.value)        
             }
         }
-        
     }
 
     stop = () => {
-        console.log('Stop')
         this.setState({finishedPlaying: true})
     }
 
     showFavoriteFacts = () => {
-        this.setState({alreadyFavorite: true})
+        this.setState({alreadyFavorite: true});
         this.setState({finishedPlaying: true});
-        this.setState({facts: this.props.favoriteFacts})
+        fetch('http://localhost:3001/getFavorites', {
+            method: 'get',
+            headers: {'Content-Type': 'application/json'},
+        })
+        .then(response => response.json())
+        .then(resp => this.setState({facts: resp}))        
     }
 
+    // showFavoriteFacts = () => {
+    //     this.setState({alreadyFavorite: true});
+    //     this.setState({finishedPlaying: true});
+    //     this.setState({facts: this.props.favoriteFacts})      
+    // }
+
     render(){
-        
         const {facts, displayedAll, alreadyFavorite, categories, selectedCategory} = this.state;
         const {route, addFavoriteFact, removeFavoriteFact} = this.props;
-
         return (
-            
             <div className='body-structure'>
                 <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
                 {
@@ -130,7 +133,6 @@ class Body extends React.Component {
                         <></>
                     )
                 }
-                
                 <div className='body-doc'>
                     <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                     <div style={{width: '50%'}}>
@@ -159,7 +161,6 @@ class Body extends React.Component {
             </div>
         );
     }
-
 }
 
 export default Body;

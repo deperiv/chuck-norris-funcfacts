@@ -27,21 +27,33 @@ class App extends Component {
                 ]
             }
         }
-
     };
 
     addFavoriteFact = (fact) => {
-        const {favoriteFacts} = this.state.user;
-        this.setState({user:Object.assign(this.state.user, {favoriteFacts: [fact, ...favoriteFacts]})})
+        fetch('http://localhost:3001/addFavorite', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({fact})
+        })
+        .then(resp => resp.json())
+        .then(facts => {
+            console.log(facts)
+            this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
+        })
     }
 
     removeFavoriteFact = (fact) => {
-        const {favoriteFacts} = this.state.user;
-        this.setState({user:Object.assign(this.state.user, {
-            favoriteFacts: favoriteFacts.filter(factF => factF.id !== fact.id)
-        })})
+        fetch('http://localhost:3001/removeFavorite', {
+            method: 'delete',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: fact.id
+            })
+        })
+        .then(facts => {
+            this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
+        })
     }
-
 
     onRouteChange = (route) => {
         if(route === 'signout') {

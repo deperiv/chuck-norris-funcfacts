@@ -2,29 +2,17 @@ import React from 'react';
 import Fact from './Fact';
 
 const FactList = ({facts, displayedAll, addFavoriteFact, removeFavoriteFact, route, alreadyFavorite}) => {
-    
     return (
-        <div >
+        <div>
             {
                 displayedAll?
-                    <>  
                         <p>There are no more facts for this category. ¡Pick another one!</p>
-                        {facts.map((funfact) => {
-                            return (
-                                <Fact 
-                                    key={funfact.id}
-                                    id={funfact.id}
-                                    text={funfact.value}
-                                    addFavoriteFact={addFavoriteFact} 
-                                    removeFavoriteFact={removeFavoriteFact}
-                                    route={route}
-                                />
-                            );
-                        })}
-                    </>
                 :
-                    facts.map((funfact) => {
-                        return (
+                    <></>
+            }    
+            {
+                facts.map((funfact) => {
+                    return (
                         <Fact 
                             key={funfact.id}
                             id={funfact.id}
@@ -34,8 +22,8 @@ const FactList = ({facts, displayedAll, addFavoriteFact, removeFavoriteFact, rou
                             alreadyFavorite={alreadyFavorite}
                             route={route}
                         />
-                        );
-                    })
+                    );
+                })
             }
         </div>
     )
