@@ -14,32 +14,28 @@ class App extends Component {
             route: 'profile',
             isSignedIn: false,
             user: {
-                name: 'Bob',
-                favoriteFacts: [
-                    {
-                        id: 1,
-                        value: 'Chuck Norris once flicked Mickey Rourke on the nose.'
-                    },
-                    {
-                        id: 4,
-                        value: 'Cristiano Ronaldo is only good at soccer for one reason. Chuck Norris taught him how to roundhouse the ball.'
-                    }
-                ]
+                id: '1',
+                name: 'John'
             }
         }
     };
 
     addFavoriteFact = (fact) => {
+        console.log(fact)
         fetch('http://localhost:3001/addFavorite', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({fact})
+            body: JSON.stringify({
+                factid: fact.id,
+                text: fact.value,
+                userid: this.state.user.id 
+            })
         })
-        .then(resp => resp.json())
-        .then(facts => {
-            console.log(facts)
-            this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
-        })
+        // .then(resp => resp.json())
+        // .then(facts => {
+        //     console.log(facts)
+        //     this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
+        // })
     }
 
     removeFavoriteFact = (fact) => {
@@ -47,12 +43,13 @@ class App extends Component {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                id: fact.id
+                factid: fact.id,
+                userid: this.state.user.id 
             })
         })
-        .then(facts => {
-            this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
-        })
+        // .then(facts => {
+        //     this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
+        // })
     }
 
     onRouteChange = (route) => {
@@ -89,7 +86,7 @@ class App extends Component {
                             <div className="warning-msg"><p>Welcome {this.state.user.name}! You better be ready to have some fun</p><p>¡Beware! Some fun facts may be politically incorrect for certain audiences</p></div>
                         </div>
                         <Body 
-                            favoriteFacts={this.state.user.favoriteFacts} 
+                            userID = {this.state.user.id}
                             addFavoriteFact={this.addFavoriteFact} 
                             removeFavoriteFact={this.removeFavoriteFact}
                             route={route}

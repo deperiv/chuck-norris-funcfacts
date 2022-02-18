@@ -104,19 +104,15 @@ class Body extends React.Component {
     showFavoriteFacts = () => {
         this.setState({alreadyFavorite: true});
         this.setState({finishedPlaying: true});
-        fetch('http://localhost:3001/getFavorites', {
+        fetch(`http://localhost:3001/getFavorites/${this.props.userID}`, {
             method: 'get',
             headers: {'Content-Type': 'application/json'},
         })
         .then(response => response.json())
-        .then(resp => this.setState({facts: resp}))        
+        .then(resp => {
+            this.setState({facts: resp.reverse()})
+        })        
     }
-
-    // showFavoriteFacts = () => {
-    //     this.setState({alreadyFavorite: true});
-    //     this.setState({finishedPlaying: true});
-    //     this.setState({facts: this.props.favoriteFacts})      
-    // }
 
     render(){
         const {facts, displayedAll, alreadyFavorite, categories, selectedCategory} = this.state;
