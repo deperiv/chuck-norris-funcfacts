@@ -14,14 +14,26 @@ class App extends Component {
             route: 'profile',
             isSignedIn: false,
             user: {
-                id: '1',
-                name: 'John'
+                id: '',
+                name: '',
+                email: '',
+                joined: ''
             }
         }
     };
 
+    loadUser = (data) => {
+        this.setState({
+          user: {
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            joined: data.joined
+          }
+        })
+      }
+
     addFavoriteFact = (fact) => {
-        console.log(fact)
         fetch('http://localhost:3001/addFavorite', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -31,11 +43,6 @@ class App extends Component {
                 userid: this.state.user.id 
             })
         })
-        // .then(resp => resp.json())
-        // .then(facts => {
-        //     console.log(facts)
-        //     this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
-        // })
     }
 
     removeFavoriteFact = (fact) => {
@@ -47,17 +54,16 @@ class App extends Component {
                 userid: this.state.user.id 
             })
         })
-        // .then(facts => {
-        //     this.setState({user:Object.assign(this.state.user, {favoriteFacts: facts})})
-        // })
     }
 
     onRouteChange = (route) => {
         if(route === 'signout') {
           this.setState({isSignedIn: false})
         } else if (route === 'home') {
-          this.setState({isSignedIn: true})
-        }
+          this.setState({isSignedIn: false})
+        } else if (route === 'profile') {
+            this.setState({isSignedIn: true})
+          }
         this.setState({route: route})
     }
 
@@ -94,8 +100,8 @@ class App extends Component {
                         </>
                         : (
                             (route === 'signin')
-                            ? <SignIn onRouteChange={this.onRouteChange}/>
-                            : <Register onRouteChange={this.onRouteChange}/>
+                            ? <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                            : <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
                         )
                     )
                 }

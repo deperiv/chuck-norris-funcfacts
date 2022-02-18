@@ -18,10 +18,19 @@ const Navigation = ({onRouteChange, route}) => {
             </nav> 
             )
             : (
-                <nav className='navigation'>
+                route === 'profile'
+                ? (
+                    <nav className='navigation'>
+                    <p onClick={()=> onRouteChange('home')} className='link-p'>Sign out</p>
+                    </nav> 
+                ) 
+                : ( //Home
+                    <nav className='navigation'>
                     <p onClick={()=> onRouteChange('register')} className='link-p'>Register</p>
                     <p onClick={()=> onRouteChange('signin')} className='link-p'>Sign In</p>
-                </nav> 
+                    </nav> 
+                )
+                
             )
         )
     )

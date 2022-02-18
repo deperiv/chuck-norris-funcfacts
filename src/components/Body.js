@@ -47,6 +47,9 @@ class Body extends React.Component {
     }
 
     async addFact (category) {
+        const chuckImg = document.getElementById("ChuckIMG")
+        chuckImg.classList.toggle("animate__jackInTheBox");
+        chuckImg.classList.toggle("animate__flipInY");
         this.setState({alreadyFavorite: false})
         let fact = await this.getFact(category);
         let count = 0;
@@ -110,7 +113,11 @@ class Body extends React.Component {
         })
         .then(response => response.json())
         .then(resp => {
-            this.setState({facts: resp.reverse()})
+            if (resp === 'No favorite facts') {
+                alert('No favorite facts');
+            } else {
+                this.setState({facts: resp.reverse()});
+            }        
         })        
     }
 
@@ -130,7 +137,7 @@ class Body extends React.Component {
                     )
                 }
                 <div className='body-doc'>
-                    <img className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
+                    <img id="ChuckIMG" className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                     <div style={{width: '50%'}}>
                         <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
                         <div className='buttn-section'>
