@@ -11,7 +11,7 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            route: 'profile',
+            route: 'home',
             isSignedIn: false,
             user: {
                 id: '',
@@ -106,7 +106,12 @@ class App extends Component {
                     )
                 }
                 <footer>
-                    <p>By deperazar. Using the <i className='link-p'>Chuck Norris API</i></p>
+                    <p>By deperazar. Using the     
+                        <a 
+                            href='https://api.chucknorris.io' 
+                            rel="noreferrer" 
+                            target='_blank' 
+                            className='link-p'>Chuck Norris API</a></p>
                 </footer>  
                 
             </>

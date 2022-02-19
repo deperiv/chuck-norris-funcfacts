@@ -83,6 +83,10 @@ h3 {
     width: 50%;
 }
 
+a {
+    margin-left: 10px;
+}
+
 .factlist-dec {
     background-color: chocolate;
     border: 8px solid black;
@@ -142,6 +146,10 @@ p {
 
 .fact-dec p {
     text-align: left;
+}
+
+.btnn-wrapper {
+    width: 50%;
 }
 
 .main-bttn{
@@ -437,14 +445,12 @@ footer .link-p:hover {
     }
 
     .favorite-btnn {
-        
         max-width: 30%;
         position: relative;
         margin: auto;
         margin-top: 20px;
         border: 5px solid black;
         border-radius: 30px 30px 30px 30px;
-        padding: 0px;
     }
     .dropdown {
         position: relative;
@@ -460,6 +466,15 @@ footer .link-p:hover {
     .warning-msg {
         width: 80%;
         text-align: center;
+        margin-bottom: 50px;
+    }
+    .warning-msg p{
+        font-size:1em;
+    }
+
+    .body-doc {
+        max-width: 90%;
+        width: 90%;
     }
 
     .dropdown-content {
@@ -469,9 +484,20 @@ footer .link-p:hover {
         border-top: 0px; 
         border-radius: 0px 0px 20px 20px;
     }
+    .btnn-wrapper {
+        width: 70%;
+    }
+    
 }
 
 @media only screen and (max-width: 940px) {
+    .title{
+        font-size: 2em;
+        margin-bottom: 70px;
+    }
+    .favorite-btnn {
+        max-width: 300px;
+    }
     .buttn-section {
         display: flex;
         flex-direction: column;

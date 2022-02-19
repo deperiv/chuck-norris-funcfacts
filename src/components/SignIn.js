@@ -16,24 +16,33 @@ class SignIn extends React.Component{
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3001/signin', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.signInEmail,
-                password: this.state.signInPassword
-            })
-        })
-        .then(response => response.json())
-        .then(user => {
-            if (user.id){
-                console.log(user);
-                this.props.loadUser(user)
-                this.props.onRouteChange('profile');
-            }  else {
-                console.log('no user')
+        const {signInEmail, signInPassword} = this.state;
+        if (signInEmail && signInPassword) {
+            if(signInEmail.includes('@') && signInEmail.includes('.com')){
+                fetch('http://localhost:3001/signin', {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email:signInEmail,
+                        password: signInPassword
+                    })
+                })
+                .then(response => response.json())
+                .then(user => {
+                    if (user.id){
+                        this.props.loadUser(user)
+                        this.props.onRouteChange('profile');
+                    }  else {
+                        alert('Wrong Credentials');
+                    }
+                })
+                .catch(error => console.log(error));
+            } else {
+                alert('Put in a valid email address');
             }
-        })   
+        } else {
+            alert('Fill in all fields');
+        }
     }
 
     render(){

@@ -22,22 +22,35 @@ class Register extends React.Component {
     }
 
     onSubmitRegister = () => {
-        fetch('http://localhost:3001/register', {
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password,
-                name: this.state.name,
-            })
-        })
-        .then(response => response.json())
-        .then(user => {
-            if (user){
-                this.props.loadUser(user)
-                this.props.onRouteChange('profile');
-            }   
-        })   
+        const {name, email, password} = this.state;
+        if (name && email && password) {
+            if(email.includes('@') && email.includes('.com')){
+                fetch('http://localhost:3001/register', {
+                    method: 'post',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email: this.state.email,
+                        password: this.state.password,
+                        name: this.state.name,
+                    })
+                })
+                .then(response => response.json())
+                .then(user => {
+                        if (user === 'Unable to register'){
+                            alert(user)
+                        } else {
+                            this.props.loadUser(user)
+                            this.props.onRouteChange('profile');
+                        }
+                })
+                .catch(error => console.log('Unable to register: ', error));  
+            }
+            else {
+                alert('Put in a valid email address')
+            }
+        } else {
+            alert('Fill in all fields')
+        }
     }
 
     render(){

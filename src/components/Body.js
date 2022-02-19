@@ -12,16 +12,33 @@ class Body extends React.Component {
             categories: [],
             selectedCategory: 'All',
             facts: [],
+            prevProps: this.props,
             finishedPlaying: false,
             displayedAll: false,
-            alreadyFavorite: false,
+            alreadyFavorite: false
         }
     }
     componentDidMount(){
+        this.setState({facts: []});
         fetch('https://api.chucknorris.io/jokes/categories')  
         .then(resp => resp.json())
         .then(categories => this.setState({categories: ['All', ...categories]}))
         .catch(error => console.log(error));
+    }
+
+    componentDidUpdate() { //Delete facts from fact list when signout or signin
+        const {route} = this.state.prevProps;
+        if (this.props.route !== route) {
+            this.setState({
+                categories: [],
+                selectedCategory: 'All',
+                facts: [],
+                prevProps: this.props,
+                finishedPlaying: true,
+                displayedAll: false,
+                alreadyFavorite: false
+            });
+          }
     }
 
     changeCategory = (category) => {
@@ -47,9 +64,9 @@ class Body extends React.Component {
     }
 
     async addFact (category) {
-        const chuckImg = document.getElementById("ChuckIMG")
-        chuckImg.classList.toggle("animate__jackInTheBox");
-        chuckImg.classList.toggle("animate__flipInY");
+        // const chuckImg = document.getElementById("ChuckIMG")
+        // chuckImg.classList.toggle("animate__jackInTheBox");
+        // chuckImg.classList.toggle("animate__flipInY");
         this.setState({alreadyFavorite: false})
         let fact = await this.getFact(category);
         let count = 0;
@@ -138,11 +155,11 @@ class Body extends React.Component {
                 }
                 <div className='body-doc'>
                     <img id="ChuckIMG" className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
-                    <div style={{width: '50%'}}>
+                    <div className='btnn-wrapper'>
                         <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
                         <div className='buttn-section'>
-                            <button className='cool-bttn' onClick={()=> this.goAuto('start')}> Automatic </button>
-                            <button className='cool-bttn' onClick={()=>this.stop()}> Stop </button>
+                            <button className='cool-bttn' onClick={()=> this.goAuto('start')}>Autoplay</button>
+                            <button className='cool-bttn' onClick={()=>this.stop()}>Stop</button>
                         </div>
                     </div>
                 </div>
@@ -156,7 +173,7 @@ class Body extends React.Component {
                                             displayedAll={displayedAll} 
                                             addFavoriteFact={addFavoriteFact} 
                                             removeFavoriteFact={removeFavoriteFact}
-                                            alreadyFavorite = {alreadyFavorite}
+                                            alreadyFavorite={alreadyFavorite}
                                             route={route}/>
                             </ErrorBoundary>
                         )}
