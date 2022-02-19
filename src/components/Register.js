@@ -25,7 +25,7 @@ class Register extends React.Component {
         const {name, email, password} = this.state;
         if (name && email && password) {
             if(email.includes('@') && email.includes('.com')){
-                fetch('http://localhost:3001/register', {
+                fetch('https://shrouded-sea-80504.herokuapp.com/register', {
                     method: 'post',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({

@@ -34,7 +34,7 @@ class App extends Component {
       }
 
     addFavoriteFact = (fact) => {
-        fetch('http://localhost:3001/addFavorite', {
+        fetch('https://shrouded-sea-80504.herokuapp.com/addFavorite', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -46,7 +46,7 @@ class App extends Component {
     }
 
     removeFavoriteFact = (fact) => {
-        fetch('http://localhost:3001/removeFavorite', {
+        fetch('https://shrouded-sea-80504.herokuapp.com/removeFavorite', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

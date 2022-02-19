@@ -52,7 +52,7 @@ class Body extends React.Component {
     }
 
     async getFact (category) {
-        const responseFetch = await fetch('http://localhost:3001/addFact', {
+        const responseFetch = await fetch('https://shrouded-sea-80504.herokuapp.com/addFact', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -124,7 +124,7 @@ class Body extends React.Component {
     showFavoriteFacts = () => {
         this.setState({alreadyFavorite: true});
         this.setState({finishedPlaying: true});
-        fetch(`http://localhost:3001/getFavorites/${this.props.userID}`, {
+        fetch(`https://shrouded-sea-80504.herokuapp.com/getFavorites/${this.props.userID}`, {
             method: 'get',
             headers: {'Content-Type': 'application/json'},
         })
