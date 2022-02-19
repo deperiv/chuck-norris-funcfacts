@@ -72,7 +72,7 @@ class Body extends React.Component {
         }
         if (count === 10){ //Too many fetches. Probably no more facts
             this.setState({displayedAll: true})
-            return {id:'0', value:'No more facts'}
+            return {id:'0', value:'There are no more jokes for this category'}
         } else { // Found a fact that it is not already in the facts array
             this.setState({displayedAll: false})
             this.setState({facts: [fact, ...this.state.facts]})
@@ -127,7 +127,7 @@ class Body extends React.Component {
         .then(response => response.json())
         .then(resp => {
             if (resp === 'No favorite facts') {
-                alert('No favorite facts');
+                alert('You have 0 favorite jokes');
             } else {
                 this.setState({facts: resp.reverse()});
             }        
@@ -148,7 +148,7 @@ class Body extends React.Component {
                     {
                         route === 'profile'
                         ?(
-                            <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
+                            <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite jokes</p></div>
                         )
                         :(
                             <></>
@@ -157,7 +157,8 @@ class Body extends React.Component {
                     <div className='body-doc'>
                         <img id="ChuckIMG" className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
                         <div className='btnn-wrapper'>
-                            <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
+                            <button className='main-bttn cool-bttn' 
+                                onClick={() => this.addFact(selectedCategory)}>Get a Random Joke</button>
                             <div className='buttn-section'>
                                 <button className='cool-bttn' onClick={()=> this.goAuto('start')}>Autoplay</button>
                                 <button className='cool-bttn' onClick={()=>this.stop()}>Stop</button>
@@ -166,7 +167,7 @@ class Body extends React.Component {
                     </div>
                         <Scroll>
                             {!facts.length ? 
-                                <h2>No fun facts yet</h2> 
+                                <h2>No jokes yet</h2> 
                             : (
                                 <ErrorBoundary>
                                             <FactsList 

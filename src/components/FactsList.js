@@ -6,7 +6,7 @@ const FactList = ({facts, displayedAll, addFavoriteFact, removeFavoriteFact, rou
         <div>
             {
                 displayedAll?
-                        <p>There are no more facts for this category. ¡Pick another one!</p>
+                        <p>There are no more jokes for this category. ¡Pick another one!</p>
                 :
                     <></>
             }    
