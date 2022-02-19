@@ -140,7 +140,7 @@ class Body extends React.Component {
         return (
             <>
             {
-                noBody //In register or sigin in route
+                !noBody //In register or sigin in route
                 ? 
                 <>
                 <div className='body-structure'>
