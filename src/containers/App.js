@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+import Navigation         from '../components/Navigation';
+import Body               from '../components/Body';
+import SignIn             from '../components/SignIn';
+import Register           from '../components/Register';
 import './App.css';
-import Navigation       from '../components/Navigation';
-import Body             from '../components/Body';
 import 'animate.css';
-import SignIn from '../components/SignIn';
-import Register from '../components/Register';
 
 class App extends Component {
 
@@ -70,17 +70,18 @@ class App extends Component {
         return (
             <>  
                 <Navigation onRouteChange={this.onRouteChange} route={route}/>
-                <p className='title'>Chuck Norris Fun Facts</p>
+                <p className='title'>Chuck Norris Jokes</p>
                 {
                     route === 'home'
                     ? <>
                         <div className='mid-row'>
-                            <div className="warning-msg"><p>¡Beware! Some fun facts may be politically incorrect for certain audiences</p></div>
+                            <div className="warning-msg"><p>¡Beware! Some jokes may be politically incorrect for certain audiences</p></div>
                         </div>
                         <Body 
                             addFavoriteFact={this.addFavoriteFact} //Wont be used
                             removeFavoriteFact={this.removeFavoriteFact} //Wont be used
                             route={route}
+                            noBody={false}
                         />
                     </>
                     : (
@@ -94,12 +95,19 @@ class App extends Component {
                             addFavoriteFact={this.addFavoriteFact} 
                             removeFavoriteFact={this.removeFavoriteFact}
                             route={route}
+                            noBody={false}
                         />                   
                         </>
                         : (
                             (route === 'signin')
-                            ? <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
-                            : <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                            ? <>
+                                <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                                <Body noBody={true}/>
+                            </>
+                            : <>
+                                <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
+                                <Body noBody={true}/>
+                            </>
                         )
                     )
                 }

@@ -40,10 +40,6 @@ class Body extends React.Component {
         }
     }
 
-    componentWillUnmount(){
-        this.stop();
-    }
-
     changeCategory = (category) => {
         this.setState({selectedCategory: category});
         this.setState({displayedAll: false});
@@ -140,45 +136,54 @@ class Body extends React.Component {
 
     render(){
         const {facts, displayedAll, alreadyFavorite, categories, selectedCategory} = this.state;
-        const {route, addFavoriteFact, removeFavoriteFact} = this.props;
+        const {route, addFavoriteFact, removeFavoriteFact, noBody} = this.props;
         return (
-            <div className='body-structure'>
-                <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
-                {
-                    route === 'profile'
-                    ?(
-                        <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
-                    )
-                    :(
-                        <></>
-                    )
-                }
-                <div className='body-doc'>
-                    <img id="ChuckIMG" className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
-                    <div className='btnn-wrapper'>
-                        <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
-                        <div className='buttn-section'>
-                            <button className='cool-bttn' onClick={()=> this.goAuto('start')}>Autoplay</button>
-                            <button className='cool-bttn' onClick={()=>this.stop()}>Stop</button>
+            <>
+            {
+                noBody //In register or sigin in route
+                ? 
+                <>
+                <div className='body-structure'>
+                    <CategorySelector categories={categories} selectedCategory={selectedCategory} changeCategory={this.changeCategory}/> 
+                    {
+                        route === 'profile'
+                        ?(
+                            <div className='favorite-btnn' onClick={() => this.showFavoriteFacts()}><p>Show your favorite facts</p></div>
+                        )
+                        :(
+                            <></>
+                        )
+                    }
+                    <div className='body-doc'>
+                        <img id="ChuckIMG" className="image animate__animated animate__jackInTheBox" src={chuck} alt="Chuck"/>
+                        <div className='btnn-wrapper'>
+                            <button className='main-bttn cool-bttn' onClick={() => this.addFact(selectedCategory)}>Get a Random FunFact</button>
+                            <div className='buttn-section'>
+                                <button className='cool-bttn' onClick={()=> this.goAuto('start')}>Autoplay</button>
+                                <button className='cool-bttn' onClick={()=>this.stop()}>Stop</button>
+                            </div>
                         </div>
                     </div>
+                        <Scroll>
+                            {!facts.length ? 
+                                <h2>No fun facts yet</h2> 
+                            : (
+                                <ErrorBoundary>
+                                            <FactsList 
+                                                facts={facts} 
+                                                displayedAll={displayedAll} 
+                                                addFavoriteFact={addFavoriteFact} 
+                                                removeFavoriteFact={removeFavoriteFact}
+                                                alreadyFavorite={alreadyFavorite}
+                                                route={route}/>
+                                </ErrorBoundary>
+                            )}
+                        </Scroll>
                 </div>
-                    <Scroll>
-                        {!facts.length ? 
-                            <h2>No fun facts yet</h2> 
-                        : (
-                            <ErrorBoundary>
-                                        <FactsList 
-                                            facts={facts} 
-                                            displayedAll={displayedAll} 
-                                            addFavoriteFact={addFavoriteFact} 
-                                            removeFavoriteFact={removeFavoriteFact}
-                                            alreadyFavorite={alreadyFavorite}
-                                            route={route}/>
-                            </ErrorBoundary>
-                        )}
-                    </Scroll>
-            </div>
+                </>
+                : <></>
+            }
+            </>
         );
     }
 }
