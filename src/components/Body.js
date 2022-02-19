@@ -30,7 +30,6 @@ class Body extends React.Component {
         const {route} = this.state.prevProps;
         if (this.props.route !== route) {
             this.setState({
-                categories: [],
                 selectedCategory: 'All',
                 facts: [],
                 prevProps: this.props,
