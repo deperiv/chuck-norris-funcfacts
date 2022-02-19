@@ -41,7 +41,7 @@ class Body extends React.Component {
     }
 
     componentWillUnmount(){
-        this.setState({finishedPlaying: true})
+        this.stop();
     }
 
     changeCategory = (category) => {
