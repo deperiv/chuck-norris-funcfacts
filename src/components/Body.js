@@ -37,7 +37,11 @@ class Body extends React.Component {
                 displayedAll: false,
                 alreadyFavorite: false
             });
-          }
+        }
+    }
+
+    componentWillUnmount(){
+        this.setState({finishedPlaying: true})
     }
 
     changeCategory = (category) => {
@@ -63,9 +67,6 @@ class Body extends React.Component {
     }
 
     async addFact (category) {
-        // const chuckImg = document.getElementById("ChuckIMG")
-        // chuckImg.classList.toggle("animate__jackInTheBox");
-        // chuckImg.classList.toggle("animate__flipInY");
         this.setState({alreadyFavorite: false})
         let fact = await this.getFact(category);
         let count = 0;
