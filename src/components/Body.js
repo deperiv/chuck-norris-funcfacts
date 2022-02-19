@@ -94,7 +94,7 @@ class Body extends React.Component {
         }
         
         const audioResponse = await
-            fetch(`http://api.voicerss.org/?key=${options.key}&hl=${options.language}&v=${options.voice}&c=MP3&f=${options.audioFormat}&src=${options.src}`, {            
+            fetch(`https://api.voicerss.org/?key=${options.key}&hl=${options.language}&v=${options.voice}&c=MP3&f=${options.audioFormat}&src=${options.src}`, {            
             method: "GET"});
         const audio = new Audio(audioResponse.url);
         await audio.play();
