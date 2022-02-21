@@ -117,7 +117,6 @@ class App extends Component {
                             rel="noreferrer" 
                             target='_blank' 
                             className='link-p'>deperazar</a>
-                        
                         . Using the     
                         <a 
                             href='https://api.chucknorris.io' 
