@@ -462,7 +462,9 @@ footer .link-p:hover {
         border-radius: 30px 30px 30px 30px;
         padding: 0px 10px 0px 30px;
     }
-
+    .btnn-wrapper {
+        width: 40%;
+    }
     .warning-msg {
         width: 80%;
         text-align: center;
@@ -493,7 +495,6 @@ footer .link-p:hover {
     }
     .btnn-wrapper {
         width: 70%;
-        background-color: red;
     }
     .favorite-btnn {
         max-width: 300px;
