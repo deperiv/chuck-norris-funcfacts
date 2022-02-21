@@ -116,7 +116,7 @@ class App extends Component {
                             href='mailto: danielpblog2014@gmail.com' 
                             rel="noreferrer" 
                             target='_blank' 
-                            className='link-p'>deperazar </a>
+                            className='link-p'>deperazar</a>
                         
                         . Using the     
                         <a 
