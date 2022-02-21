@@ -493,6 +493,7 @@ footer .link-p:hover {
     }
     .btnn-wrapper {
         width: 70%;
+        background-color: blue;
     }
     .favorite-btnn {
         max-width: 300px;
