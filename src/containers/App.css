@@ -484,16 +484,15 @@ footer .link-p:hover {
         border-top: 0px; 
         border-radius: 0px 0px 20px 20px;
     }
-    .btnn-wrapper {
-        width: 70%;
-    }
-    
 }
 
 @media only screen and (max-width: 940px) {
     .title{
         font-size: 2em;
         margin-bottom: 70px;
+    }
+    .btnn-wrapper {
+        width: 70%;
     }
     .favorite-btnn {
         max-width: 300px;
