@@ -112,12 +112,19 @@ class App extends Component {
                     )
                 }
                 <footer>
-                    <p>By deperazar. Using the     
+                    <p>By <a 
+                            href='mailto: danielpblog2014@gmail.com' 
+                            rel="noreferrer" 
+                            target='_blank' 
+                            className='link-p'>deperazar </a>
+                        </p>
+                        . Using the     
                         <a 
                             href='https://api.chucknorris.io' 
                             rel="noreferrer" 
                             target='_blank' 
-                            className='link-p'>Chuck Norris API</a></p>
+                            className='link-p'>Chuck Norris API</a>
+                        </p>
                 </footer>  
                 
             </>
